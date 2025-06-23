@@ -1,0 +1,19 @@
+#User function Template for python3
+
+
+class Solution:
+
+    def kthSmallest(self, arr,k):
+        # small=1000001
+        for j in range(k):
+            small=arr[j]
+            place=j
+            for i in range(j+1,len(arr)):
+                if small>arr[i]:
+                    small=arr[i]
+                    place=i
+                # print(small," - ",arr[i])
+            arr[place]=arr[j]
+            arr[j]=small
+            
+        return arr[k-1]
