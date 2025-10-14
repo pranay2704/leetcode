@@ -5,31 +5,17 @@ class Node:
         self.left = None
         self.right = None
 """
-
 class Solution:
     def nodeSum(self, root, l, r):
-        # code here
-        total=0
-        
-        def check(self, root1):
-            total1=0
-            if root1.data>=l:
-                if root1.data<=r:
-                    total1=root1.data
-                    if root1.left!=None:
-                        total1+=check(self, root1.left)
-                    if root1.right!=None:
-                        total1+=check(self, root1.right)
-                elif root1.left!=None:
-                    total1=check(self, root1.left)
-            elif root1.right!=None:
-                total1=check(self, root1.right)
-            return total1
-        if root!=None:
-            total=check(self, root)
-            return total
-        else:
-            return 0
+        def check(node):
+            if not node:
+                return 0
+            if node.data < l:
+                return check(node.right)
+            if node.data > r:
+                return check(node.left)
+            return node.data + check(node.left) + check(node.right)
+        return check(root)
                 
         
         
