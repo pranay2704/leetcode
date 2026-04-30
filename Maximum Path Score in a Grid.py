@@ -1,5 +1,36 @@
 class Solution:
     def maxPathScore(self, grid: List[List[int]], k: int) -> int:
+        def rec(grid, i, j, k):
+            if i >= len(grid) or j >= len(grid[0]):
+                return -1
+
+            if grid[i][j] > 0:
+                if k > 0:
+                    k -= 1
+                else:
+                    return -1
+
+            if i == len(grid) - 1 and j == len(grid[0]) - 1:
+                return grid[i][j]
+
+            m1, m2 = -1, -1
+
+            if j < len(grid[0]) - 1:
+                right = rec(grid, i, j + 1, k)
+                if right != -1:
+                    m1 = right + grid[i][j]
+
+            if i < len(grid) - 1:
+                down = rec(grid, i + 1, j, k)
+                if down != -1:
+                    m2 = down + grid[i][j]
+
+            return max(m1, m2)
+
+        return rec(grid, 0, 0, k)
+        
+class Solution:
+    def maxPathScore(self, grid: List[List[int]], k: int) -> int:
         vis=[[-1 for _ in range(len(grid[0]))] for _ in range(len(grid)) ]
         def rec(self, grid, i,j,vis,k):
             if i==len(grid)-1 and j==len(grid[0])-1:
